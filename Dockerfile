@@ -31,8 +31,6 @@ RUN curl -LsSf https://astral.sh/uv/install.sh | env UV_INSTALL_DIR=/usr/local/b
     && PY312="$(uv python find 3.12)" \
     && ln -sf "$PY312" /usr/local/bin/python3 \
     && ln -sf "$PY312" /usr/local/bin/python \
-    && "$PY312" -m ensurepip --upgrade \
-    && "$PY312" -m pip install --no-cache-dir -U pip setuptools wheel \
     && uv venv --python "$PY312" /opt/lsm-venv \
     && uv pip install --python /opt/lsm-venv/bin/python "local-shell-mcp==${LSM_VERSION}" \
     && /opt/lsm-venv/bin/python -m playwright install --with-deps chromium \
