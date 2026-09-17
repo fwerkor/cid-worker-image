@@ -8,7 +8,7 @@ ENV LANG=C.UTF-8 \
     TZ=Etc/UTC \
     PIP_DISABLE_PIP_VERSION_CHECK=1 \
     PYTHONUNBUFFERED=1 \
-    PATH=/opt/lsm-venv/bin:/root/.local/bin:/usr/local/bin:/usr/bin:/bin \
+    PATH=/root/.local/bin:/usr/local/bin:/usr/bin:/bin \
     LSM_SERVER=https://local-shell-mcp.fwerkor.eu.org \
     LSM_NAME=unist3 \
     LSM_WORKDIR=/workspace
@@ -28,7 +28,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # uv gives us a pinned, isolated Python without adding a third-party apt repository.
 RUN curl -LsSf https://astral.sh/uv/install.sh | env UV_INSTALL_DIR=/usr/local/bin sh \
     && uv python install 3.12 \
-    && uv venv --python 3.12 /opt/lsm-venv \
+    && PY312="$(uv python find 3.12)" \
+    && ln -sf "$PY312" /usr/local/bin/python3 \
+    && ln -sf "$PY312" /usr/local/bin/python \
+    && "$PY312" -m ensurepip --upgrade \
+    && "$PY312" -m pip install --no-cache-dir -U pip setuptools wheel \
+    && uv venv --python "$PY312" /opt/lsm-venv \
     && uv pip install --python /opt/lsm-venv/bin/python "local-shell-mcp==${LSM_VERSION}" \
     && /opt/lsm-venv/bin/python -m playwright install --with-deps chromium \
     && rm -rf /root/.cache/uv /root/.cache/pip /var/lib/apt/lists/*
