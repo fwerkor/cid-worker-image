@@ -1,0 +1,11 @@
+Port 22
+Protocol 2
+PermitRootLogin yes
+PubkeyAuthentication yes
+PasswordAuthentication no
+KbdInteractiveAuthentication no
+UsePAM no
+X11Forwarding no
+AllowTcpForwarding yes
+ClientAliveInterval 60
+ClientAliveCountMax 3
