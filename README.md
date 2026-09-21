@@ -49,3 +49,18 @@ volume is retained.
 
 PyTorch is intentionally not pinned in the base image. Project environments can install the
 appropriate PyTorch/CUDA wheel without rebuilding the node image.
+
+## Citation
+
+This image is supporting infrastructure for Continuous Interaction Diffusion (CID). If you use it in research, please cite the CID paper:
+
+```bibtex
+@article{cao2026continuous,
+  title   = {Continuous Interaction Diffusion: A Diffusion-Native Architecture for Asynchronous Tool-Augmented Reasoning},
+  author  = {Cao, Yuhang and Mu, Yanzhou and Fang, Chunrong and Chen, Zhenyu},
+  journal = {arXiv preprint arXiv:2608.10438},
+  year    = {2026},
+  doi     = {10.48550/arXiv.2608.10438},
+  url     = {https://arxiv.org/abs/2608.10438}
+}
+```
